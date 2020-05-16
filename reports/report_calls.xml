@@ -1,0 +1,43 @@
+<odoo>
+
+    <report
+        id="call_center_2.report_iti_session1_calls"
+        model="iti.session1.calls"
+        string="Call Report"
+        name="call_center_2.report_call_view"
+        file="call_center_2.report_call"
+        report_type="qweb-pdf" />
+
+    <template id="report_call_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <center>
+                          <h2 t-field="doc.name"/>
+                        </center>
+                        <p>From <span t-field="doc.start_time"/> to <span t-field="doc.stop_time"/></p>
+                      <p>
+                        <span t-field="doc.source"/>
+                      </p>
+                      <p>
+                        <span t-field="doc.destination"/>
+                      </p>
+                       <p>
+                       <!-- many to one -->
+                        <span t-field="doc.station.name"/>
+                      </p>
+                        <h3>Tags:</h3>
+                        <ul>
+                        <!-- for many to many fields loop over  -->
+                            <t t-foreach="doc.tags" t-as="tag">
+                                <li><span t-field="tag.name"/></li>
+                            </t>
+                        </ul>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,53 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="call_center_2.station_list">
+      <field name="name">call_center_2 list</field>
+      <field name="model">iti.session1.station</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+<!-- Form view -->
+
+    <record model="ir.ui.view" id="call_center_2.station_form">
+      <field name="name">call_center_2 list</field>
+      <field name="model">iti.session1.station</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+                <h1><field name="name"/></h1>
+                <field name="calls" />
+                    <!-- <tree>
+                        <field name="source" />
+                    </tree> -->
+                <!-- </field> -->
+            </group>
+          </sheet>
+         
+        </form>
+      </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="call_center_2.station_action_window">
+      <field name="name">call_center_2 window</field>
+      <field name="res_model">iti.session1.station</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+      <!-- <menuitem name="Station " id="call_center_2.menu_2" parent="call_center_2.menu_root"/> -->
+   
+
+    <!-- actions -->
+
+    <menuitem name="Station" id="call_center_2.menu_1_station_list" parent="call_center_2.menu_1"
+              action="call_center_2.station_action_window"/>
+    </data>
+    </odoo>

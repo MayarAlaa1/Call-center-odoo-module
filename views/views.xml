@@ -1,0 +1,167 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="call_center_2.list">
+      <field name="name">call_center_2 list</field>
+      <field name="model">iti.session1.calls</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="start_time"/>
+          <field name="stop_time"/>
+          <field name="station" />
+          <field name="source"/>
+          <field name="destination"/>
+          <field name="duration" widget="float_time"/>
+        </tree>
+      </field>
+    </record>
+
+<!-- Form view -->
+
+    <record model="ir.ui.view" id="call_center_2.form">
+      <field name="name">call_center_2 list</field>
+      <field name="model">iti.session1.calls</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+           <button name="create_invoice" string="Create Invoice" type="object"/>
+             <!-- <field name="state" widget="statusbar" options="{'clickable': '1'}"/> -->
+          </header>
+          <sheet>
+            <group>
+                <h1><field name="name"/></h1>
+                     <field name="partner_id" />
+                <field name="start_time"/>
+                <field name="stop_time"/>
+                 <field name="station" />
+                <field name="source"/>
+                <field name="destination"/>
+                <field name="duration" widget="float_time"/>
+                <field name="tags" widget = "many2many_tags"/>
+                <field name="state" />
+            </group>
+          </sheet>
+         
+        </form>
+      </field>
+    </record>
+<!-- Calender view -->
+
+    <record model="ir.ui.view" id="call_center_2.calender">
+      <field name="name">call_center_2 list</field>
+      <field name="model">iti.session1.calls</field>
+      <field name="arch" type="xml">
+        <calendar date_start="start_time" date_stop="stop_time">
+            <field name="destination"/>
+            <field name="duration" widget="float_time"/>
+        </calendar>
+      </field>
+    </record>
+
+    <!-- Graph view -->
+
+    <record model="ir.ui.view" id="call_center_2.graph">
+      <field name="name">call_center_2 list</field>
+      <field name="model">iti.session1.calls</field>
+      <field name="arch" type="xml">
+        <graph>
+            <field name="start_time"/>
+            <field name="duration" type="measure"/>
+        </graph>
+      </field>
+    </record>
+
+<!-- kanban -->
+ <record model="ir.ui.view" id="call_center_2.kanban">
+      <field name="name">call_center_2 kanban</field>
+      <field name="model">iti.session1.calls</field>
+      <field name="arch" type="xml">
+        <kanban>
+          <field name="name"/>
+     
+          <field name="start_time"/>
+          <field name="stop_time"/>
+          <templates>
+            <t t-name="kanban-box">
+
+              <div class="oe_kanban_global_click">
+
+               <strong><field name="name"/></strong>
+                <field name="start_time"/>
+                <field name="stop_time"/>
+
+              </div>
+            </t>
+          </templates>
+
+        </kanban>
+      </field>
+    </record>
+
+<!-- search and filter and group by-->
+ <record model="ir.ui.view" id="call_center_2.search">
+      <field name="name">call_center_2 search </field>
+      <field name="model">iti.session1.calls</field>
+      <field name="arch" type="xml">
+        <search>
+
+          <field name="station"/>
+          <field name="name"/>
+          <field name="source"/>
+          <field name="destination"/>
+          <filter name="current_month" string="Start Time" date="start_time"/>
+          <filter name="invoiced" string="Invoiced" domain="[('state', '=', 'invoiced')]"/>
+          <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+          <group string="Group By">
+            <filter name="group_by_state" string="Status" context="{'group_by': 'state'}"/>
+          </group>
+
+        </search>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="call_center_2.action_window">
+      <field name="name">call_center_2 window</field>
+      <field name="res_model">iti.session1.calls</field>
+      <field name="view_mode">tree,form,kanban,calendar,graph</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="call_center_2.action_server">
+      <field name="name">call_center_2 server</field>
+      <field name="model_id" ref="model_call_center_2_call_center_2"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item as a root menu -->
+
+    <menuitem name="Call Center" id="call_center_2.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Calls " id="call_center_2.menu_1" parent="call_center_2.menu_root"/>
+    <!-- <menuitem name="Menu 2" id="call_center_2.menu_2" parent="call_center_2.menu_root"/> -->
+
+    <!-- actions -->
+
+    <menuitem name="List" id="call_center_2.menu_1_list" parent="call_center_2.menu_1"
+              action="call_center_2.action_window"/>
+    <!-- <menuitem name="Server to list" id="call_center_2" parent="call_center_2.menu_2"
+              action="call_center_2.action_server"/> -->
+
+  </data>
+</odoo>

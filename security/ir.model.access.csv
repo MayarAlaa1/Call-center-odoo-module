@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_call_center_2_call_center_2,call_center_2.call_center_2,model_iti_session1_calls,base.group_user,1,1,1,1
+access_call_center_2_call_station_2,call_center_2.call_station_2,model_iti_session1_station,base.group_user,1,1,1,1
+access_call_center_2_call_tags_2,call_center_2.call_tags_2,model_iti_session1_tags,base.group_user,1,1,1,1
